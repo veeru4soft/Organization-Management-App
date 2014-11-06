@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<style>
+			.span3 {
+				position:absolute;
+				right:420px;
+			}
+		</style>
+		<script type='text/javascript'>
+				function validateMe() {
+					nameval = document.getElementById('grpname')
+					namevalue = nameval.value
+					if((namevalue == 'null') || (namevalue == ''))
+						{
+							document.getElementById('errormsg').innerHTML = 'Please Fill the Name'
+								return false;
+						}
+						else {
+							document.getElementById('errormsg').innerHTML = ''
+							return true;
+						}
+					}			
+		</script>
+	</head>
+	<body>
+<div class='btn'>	<%= link_to 'View Users', search_path %> </div> <br /> <br />
+		<%= form_tag({:action => "grpsave" }, :id => "form_id", :name => 'group', :class => 'form-horizontal', :onsubmit => 'return validateMe()')  do %>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Organization :</label>
+					<div class="controls">
+						<select name= 'orgsel' class = 'span2'>
+							<% @org.each do |o| %>
+								<option value=<%= o.id %>> <%= o.name %> </option>
+							<% end %>
+						</select>
+					</div>
+			    </div>
+				<div class="control-group">
+					<label class="control-label" for="inputName">Group Name: </label>
+					<div class="controls">
+					  <input type="text" name ='grpname' id="grpname" placeholder="Group Name"> <span id='errormsg'> </span>
+					</div>
+				</div>
+				<div class='span3'>
+				<%= submit_tag "Save", :id => "uploadid", :class => 'btn btn-primary'%>
+				</div>
+		<% end %>
+
+	<br />
+
+	</body>
+</html>
+
+
+

@@ -1,0 +1,4 @@
+<h1> Success fully Created </h1>
+
+<br />	
+	<%= link_to 'Create New', pplcreate_path %>

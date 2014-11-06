@@ -1,0 +1,32 @@
+<html>
+<head>
+	<script>
+			
+	</script>
+</head>
+<body>
+<select name ='prsnid' class='span2' id='personfind' %>
+<option value='s'> Select Person </option>
+		<% @person.each do |p| %>
+		<option value =<%= p.id %>   > <%= p.fname %> </option>
+		<% end %>
+</select>
+
+
+
+<br />
+<br />
+<div>
+					Skills:
+					<div  id='check1' >
+						<% begin %>
+		<% @s = @allskills %>
+		<% @s.each do |s| %>
+			<%= check_box_tag "skills[]",s, false, :id => s %> <%= s.gsub("\|2",'') %>
+	  	<% end %>
+<% rescue %>
+<% end %>
+					</div>
+				</div>
+</body>
+</html>

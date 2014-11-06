@@ -1,0 +1,10 @@
+<%= form_tag({:action => 'grpshow'}, :class=>'form-horizontal') do %>
+Choose Organization: <select name='orgsel'>
+			<% @org.each do |o| %>
+			<option value=<%= o.id %>> <%= o.name %> </option>
+			<% end %>
+		</select>
+<%= submit_tag "Show", :id => "uploadid", :class => 'btn btn-primary'%>
+<% end %>
+
+<div class='btn'> <%= link_to 'Show Users', oview_path %> </div>

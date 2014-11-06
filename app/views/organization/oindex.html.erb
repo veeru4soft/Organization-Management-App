@@ -1,0 +1,140 @@
+<html>
+	<title> Skill Management System </title>
+	<head>
+		<style>
+			.menuitems {
+				padding:10px;
+			}
+			.heading {
+				border-radius:50px;
+				background: #DDDDDD;
+				text-align: left;
+				padding:0px;
+				margin:2px 0px 0px 0px;
+			}
+			h4 {
+				margin-left:20px;
+			}			
+			.menucontainer {
+				background:#EEEEEE;
+				border-radius:10px;
+				box-shadow:8px 5px 5px #000;
+			}
+			.lastone {
+				margin-bottom:30px !important;
+			}
+			.bgimg {
+				background:#f2f2f2;
+				border-radius:10px;
+				box-shadow:2px 3px 4px #ddd;
+				width:80px;
+				padding-left:10px;
+				margin-right:20px;
+			}
+			.menu {
+				width:500px !important;
+			}
+			
+		</style>
+		<script>
+			$(document).ready(function() { 
+
+				$('#orgcreate').tooltip({
+					title: 'Click to Goto the Organization Creation Form',
+					placement: 'bottom'
+
+				})
+			
+				$('#grpcreate').tooltip({
+					title: 'Click to Goto the Group Creation Form',
+					placement: 'bottom'
+
+				})
+
+				$('#pplcreate').tooltip({
+					title: 'Click to Goto the User Creation Form',
+					placement: 'bottom'
+
+				})
+
+				$('#orgview1').tooltip({
+					title: 'Displaying all Organizations',
+					placement: 'bottom'
+
+				})
+			
+				$('#grpview1').tooltip({
+					title: 'Showing you to the Groups',
+					placement: 'bottom'
+
+				})
+
+				$('#pplview').tooltip({
+					title: 'Getting all the Person Details',
+					placement: 'bottom'
+
+				})
+
+				$('#skillcreate1').tooltip({
+					title: 'Creating Skills for Person',
+					placement: 'bottom'
+
+				})
+
+				$('#skillview').tooltip({
+					title: 'Retrieving Skills of Group',
+					placement: 'bottom'
+
+				})
+
+				$('#grpskillcreate').tooltip({
+					title: 'Creating Skills for Group',
+					placement: 'bottom'
+
+				})
+		
+			});
+		</script>
+	</head>
+	<body>
+		<div class='containter'>
+			<div class='row well'>
+				 You can view all Persons, Organizations, Groups  Directly when you click on number
+			</div>
+			<div class='row'>
+			  <div class='span12'> <!-- Main div Opened -->
+			  <div class='span5 menucontainer pull-left'> <!-- Menu Item -->
+				<div class='span5 heading'>
+					<h4> Dashboard </h4>
+				</div>
+				<div class='span5'>
+					<div class='span3 menuitems'> <img src='assets/home.png' /> Organizations </div>
+					<div class = 'span1 menuitems'> <%= link_to @org, allorgshow_path, :title=>'Show Organizations' %> </div>
+					<div class='span3 menuitems'> <img src='assets/group1.png' /> Groups </div>
+					<div class = 'span1 menuitems'> <%= link_to @grp, grpallshow_path, :title=>'Show Groups' %> </div>
+					<div class='span3 menuitems'> <img src='assets/user1.png' /> Persons </div>
+					<div class = 'span1 menuitems'> <%= link_to @prsn, pplallshow_path, :title=>'Show Users' %> </div>
+				</div>
+			  </div> <!-- Menu Items Closed -->
+			  <div class='span6 pull-right menu'>
+					<div class='span2 bgimg'> <%= link_to image_tag('/assets/company.png', :id=>'orgcreate'), ocreate_path %> <small> <center> creat Org </center> </small> </div>
+					<div class='span2 bgimg'>  <%= link_to image_tag('/assets/user-group.png',  :id=>'grpcreate'), gcreate_path %> <small> <center> creat group </center> </small> </div> 
+					<div class='span1 lastone bgimg'> <%= link_to image_tag('/assets/people.png', :id=>'pplcreate'), pplcreate_path %>  <small> <center> creat user </center> </small> </div>
+	
+					<!-- Viewing -->
+	
+					<div class='span2 imgsize bgimg'> <%= link_to image_tag('/assets/gwenview.png', :id=>'orgview1'), allorgshow_path %> <small> <center> show org </center> </small> </div>
+					<div class='span2 imgsize bgimg'>  <%= link_to image_tag('/assets/kuser.png',  :id=>'grpview1'), grpallshow_path %> <small> <center> show group </center> </small> </div>
+					<div class='span1 lastone bgimg'> <%= link_to image_tag('/assets/administrator.png', :id=>'pplview'), pplallshow_path %> <small> <center> show user </center> </small> </div>
+
+
+					<div class='span2 bgimg'> <%= link_to image_tag('/assets/skills.png', :id=>'skillcreate1'), spcreate_path %> <small> <center> creat person skill </center> </small> </div>
+					<div class='span2 bgimg'>  <%= link_to image_tag('/assets/view.png', :id=>'skillview'), sgshow_path %> <small> <center> show group skill </center> </small> </div>
+					<div class='span1 lastone bgimg'> <%= link_to image_tag('/assets/skillcreate.png', :id=>'grpskillcreate'), sgcreate_path %> <small> <center> creat group skills </center> </small> </div>
+
+			  </div>
+			</div> <!-- Main div closed -->
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,8 @@
+<h1> Success </h1>
+<%= form_tag({:action => "sshow" }, :name => 'group')  do %>
+Enter Person Id:
+<input type="text" name ="prsnid" id ="numid">
+<input type="text" name ="grpid" id ="numid">
+
+<%= submit_tag "Save", :id => "uploadid"%>
+<% end %>	

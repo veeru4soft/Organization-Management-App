@@ -1,0 +1,12 @@
+<div class='btn'> <%= link_to 'Create New Organization', ocreate_path %> </div> <br/> <br />
+
+<%= form_tag({:action => 'show'}, :class=>'form-horizontal') do %>
+Choose Organization : <select name='orgsel'>
+			<% @org.each do |o| %>
+			<option value=<%= o.id %>> <%= o.name %> </option>
+			<% end %>
+		</select>
+<%= submit_tag "Show", :id => "uploadid", :class => 'btn btn-primary'%>
+<% end %>
+
+

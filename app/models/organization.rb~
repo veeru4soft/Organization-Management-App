@@ -1,0 +1,6 @@
+class Organization < ActiveRecord::Base
+
+  attr_accessible :name, :email, :city, :state, :website, :phnum
+	has_many :groups, :people, :dependent => :destroy
+	
+end

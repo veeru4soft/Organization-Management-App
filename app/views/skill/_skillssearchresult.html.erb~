@@ -1,0 +1,7 @@
+<% begin %>
+		<% @s = @allskills[0].gsub(' ','').gsub("'",'').chomp().split(',') %>
+		<% @s.each do |s| %>
+			<%= check_box_tag "skills[]",s, false, :id => s %> <%= s %>
+	  	<% end %>
+<% rescue %>
+<% end %>

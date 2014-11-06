@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<style>
+			.control-label{
+				float:left !important;
+			}
+			.span3 {
+				position:absolute;
+				right:400px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="span12">
+				<%= form_tag({:action => "ssave" }, :name => 'skills', :class => 'form-horizontal')  do %>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Group Id:</label>
+					<div class="controls">
+							<select name='grpsel' class='span1'>
+									<% @grp.each do |g| %>
+								<option value=<%= g.id %>> <%= g.id %> </option>
+									<% end %>
+							</select>
+					  </div>
+			    </div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk1">Skill1:</label>
+					<div class="controls">
+					  <input type="text" name ='sk1' id="sk1" placeholder="Skill1">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk2">Skill2:</label>
+					<div class="controls">
+					  <input type="text" name ='sk2' id="sk2" placeholder="Skill2">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk3">Skill3:</label>
+					<div class="controls">
+					  <input type="text" name ='sk3' id="sk3" placeholder="Skill3">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk4">Skill4:</label>
+					<div class="controls">
+					  <input type="text" name ='sk4' id="sk4" placeholder="Skill4">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk5">Skill5:</label>
+					<div class="controls">
+					  <input type="text" name ='sk5' id="sk5" placeholder="Skill5">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk6">Skill6:</label>
+					<div class="controls">
+					  <input type="text" name ='sk6' id="sk6" placeholder="Skill6">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk7">Skill7:</label>
+					<div class="controls">
+					  <input type="text" name ='sk7' id="sk7" placeholder="Skill7">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk8">Skill8:</label>
+					<div class="controls">
+					  <input type="text" name ='sk8' id="sk8" placeholder="Skill8">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk9">Skill9:</label>
+					<div class="controls">
+					  <input type="text" name ='sk9' id="sk9" placeholder="Skill9">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk10">Skill10:</label>
+					<div class="controls">
+					  <input type="text" name ='sk10' id="sk10" placeholder="Skill10">
+					</div>
+				</div>
+				
+			<div class="pull-left span3">
+				<%= submit_tag "Save", :id => "uploadid", :class => 'btn btn-primary'%>
+			</div>
+	<% end %>
+ 	</body>
+</html>

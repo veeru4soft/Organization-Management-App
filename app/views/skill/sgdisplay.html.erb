@@ -1,0 +1,87 @@
+<html>
+	<head>
+						<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		  <script>
+				$('document').ready(function(){
+				
+				$('#opdelete').click(function(e){
+					
+					e.preventDefault();
+					var va = $(this).attr("class");
+					$( "#dialog-confirm" ).dialog({
+					  resizable: false,
+					  height:180,
+					  width:400,
+					  modal: true,
+					  buttons: {
+						"Delete": function() {
+						  $( this ).dialog( "close" );
+							
+							  $.ajax({
+				        		url: "/skilldestroy",
+								data: {id: va},
+				        		success: function (data) {
+									$("#myid").html("successfully deleted");
+									$("#myid1").html(" ");
+				        		}
+				    		   });
+
+						 },
+						"No": function() {
+						  $( this ).dialog( "close" );
+							return false;
+						  }
+						  }
+					  }); 
+				});				
+						
+
+});
+		  </script>
+	</head>
+	<body>
+		<div id='myid1'>
+
+		<h1>Listing Group Skills</h1>
+
+		<div class='pull-right'>
+			<%= link_to 'Add Group Skills', sgcreate_path, :class=>'btn' %>
+		</div>
+		
+
+		<table class='table table-stiped table-hover'>
+		  <tr>
+			<th> Group Name:</th>
+			<% begin %>
+			<% @allskills.each do |s| %>
+			<th>Skill Name</th>
+			<% end %>
+			<% rescue %>
+			<% end %>
+			<th class='opth' colspan='2'> Action </th>	
+			</tr>
+
+		<% @skills.each do |s| %>
+		   <tr>
+			<td> <%= @group.name %> </td>
+			<% begin %>
+			<% @allskills.each do |s| %>
+			<td><%= sanitize(s.to_s.gsub('"',"").gsub('\r',"").gsub("\|2",'').gsub('\n',"<br/>")) %></td>
+			<% end %>	
+			<% rescue %>
+			<% end %>
+			<td class='optd'> <a href='/grpskilledit/<%= s.id %>&<%= s.group_id %>' title='Click to Edit the Skills' > <img src='assets/tab_edit.png'> </a> </td>
+			<td class='optd'> <%= link_to image_tag('/assets/delete.png'), skilldestroy_path(:id=> s.id), :title=>'Click to Edit the Skills', :class=>s.id, :id=>'opdelete' %> </td>
+		   </tr>
+		<% end %>
+		</table>
+	</div>
+
+	<div id="dialog-confirm" title="Do you wanna Delete this?">
+  <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>This item will be permanently deleted and cannot be recovered. Are you sure?</p> </div>
+
+
+		<br />
+<div class='btn'>			<%= link_to 'Back', sgshow_path%> </div> 

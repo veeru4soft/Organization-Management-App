@@ -1,0 +1,10 @@
+Given /^at Index Page$/ do
+end
+
+	When I click on Skills Menu
+	Then I should see Menu List
+	When I click on Create Skills for Group 
+	Then I should see User Skills form with two fields if you want more fields
+	Then you should click on Add Skills button
+	When I fill all the fields and click on Create Button
+	Then Skills created under one Group

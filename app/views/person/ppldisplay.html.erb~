@@ -1,0 +1,105 @@
+<html>
+	<head>
+		  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		  <script>
+				$('document').ready(function(){
+				
+				$('#opdelete').click(function(e){
+						
+					e.preventDefault();
+					var va = $(this).attr("class");
+					$( "#dialog-confirm" ).dialog({
+					  resizable: false,
+					  height:180,
+					  width:400,
+					  modal: true,
+					  buttons: {
+						"Delete": function() {
+						  $( this ).dialog( "close" );
+							//return true;
+							  $.ajax({
+				        		url: "/ppldestroy",
+								data: {id: va},
+				        		success: function (data) {
+								 $("#myid").html("successfully deleted");
+								 $('#myid1').html("");
+				        		}
+				    		   });
+
+						 },
+						"No": function() {
+						  $( this ).dialog( "close" );
+							return false;
+						  }
+						  }
+					  }); 
+				});				
+						
+
+});
+		  </script>
+		
+			<style>
+				table{
+					width:500px !important;
+				}				
+				td,th{
+					width:100px !important;
+				}
+			</style>
+	</head>
+	<body>
+	<div id="myid1">
+
+		<div class='pull-right'>
+			<%= link_to 'Add Person', pplcreate_path, :class=> 'btn'%>
+		</div>
+		<h1>Person Information</h1>
+
+<table class='table table-stiped table-hover profilepic'>
+  <tr>
+    <th>User Id</th> <td><%= @person.id%></td> <% @cont = Base64.encode64(@person.propic) %>
+    <td rowspan='3' class='imgstyle'> <img src="data:image/jpeg;base64,<%= @cont %>" class="img-polaroid" /> </td>
+  </tr>
+  <tr>
+    <th>User First Name</th> <td> <%=@person.fname %> </td> 
+  </tr>
+  <tr> 
+    <th>User Last Name</th> <td><%= @person.name %></td> 
+  </tr>
+  <tr>
+    <th>User Date of Birth</th> <td><%= @person.dob %></td> <td> </td>
+  </tr>
+  <tr>
+    <th>User Email id</th> <td> <%= @person.email %> </td> <td> </td>
+  </tr>
+  <tr> 
+    <th>User Place</th> <td><%= @person.place %></td> <td> </td>
+  </tr>
+  <tr>
+    <th>User Phone Number</th> <td> <%= @person.phnum %> </td> <td> </td>
+  </tr>
+  <tr>
+	<% begin %>
+    <th> Skills </th> <td> <% @allskills.each do |s| %>
+    	<%= sanitize(s.to_s.gsub('"',"").gsub('\r',"").gsub('\n',"<br/>")) %>
+	<% end %>	</td> <td> </td>
+	<% rescue %>
+	<% end %>
+  </tr>
+  <tr> <th> Action </th>
+
+	<td id='op1'> <a href='/ppledit/<%= @person.id %>' title='Click to Edit the User' id='opedit' > <img src='assets/tab_edit.png'> </a> &nbsp; &nbsp; &nbsp; &nbsp;	<%= link_to image_tag('/assets/delete.png'), ppldestroy_path(:id=>@person.id), :title=>'Click to Delete the User', :class=> @person.id, :id=> 'opdelete' %> </td> <td> </td>
+  </tr>
+ </table>
+</div>
+<br />
+
+<div id="dialog-confirm" title="Do you wanna Delete this?">
+  <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>This item will be permanently deleted and cannot be recovered. Are you sure?</p> </div>
+
+	<div class='btn'> <%= link_to 'show', pplshow_path %> </div>
+	</body>
+</html>

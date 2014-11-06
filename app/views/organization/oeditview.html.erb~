@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<style>
+			.control-label{
+				float:left !important;
+			}
+			.span3 {
+				position:absolute;
+				right:400px;
+			}
+		</style>
+			
+		<script type='text/javascript'>
+				function validateMe() {
+					nameval = document.getElementById('orgname')
+					namevalue = nameval.value
+					if((namevalue == 'null') || (namevalue == ''))
+						{
+							document.getElementById('errormsg').innerHTML = 'Please Fill the Name'
+								return false;
+						}
+						else {
+							document.getElementById('errormsg').innerHTML = ''
+							return true;
+						}
+					}			
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="span12">
+				<%= form_tag({:action => "orgupdate" }, :id => "form_id", :name => 'organization', :class => 'form-horizontal', :onsubmit => 'return validateMe()')  do %>
+				<div class="control-group">
+					<label class="control-label" for="inputName">*Organization Name:</label>
+					<div class="controls">
+					  <input type="text" name ="orgname" id ="orgname" value=<%= @org.name %>> <span id='errormsg'> </span>
+					</div>
+			    </div>
+				<div class="control-group">
+					<label class="control-label" for="inputCity">City</label>
+					<div class="controls">
+					  <input type="text" name ='orgcity' id="orgcity" value=<%= @org.city %>>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputState">State</label>
+					<div class="controls">
+					  <input type="text" name ='orgstate' id="orgstate" value=<%= @org.state %>>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputphone">Phone Number</label>
+					<div class="controls">
+					  <input type="text" name ='orgph' id="orgph" value=<%= @org.phnum %>>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputEmail">Email</label>
+					<div class="controls">
+					  <input type="text" name ='orgemail' id="orgemail" value=<%= @org.email %>>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputwebsite">Website</label>
+					<div class="controls">
+					  <input type="text" name ='orgweb' id="orgweb" value=<%= @org.website %>>
+					</div>
+				</div>
+			<div class="pull-left span3">
+				<%= submit_tag "Update", :id => "uploadid", :class => 'btn btn-primary'%>
+			</div>
+	<% end %>
+		<br/ >
+		<div class='btn'>	<%= link_to 'Back', allorgshow_path %> </div>
+ 	</body>
+</html>
+

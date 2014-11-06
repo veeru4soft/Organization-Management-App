@@ -1,0 +1,11 @@
+<html>
+	<head>
+	<head>
+	<body>
+		<select name='grpsel' class='span3' >
+			<%= @groups.each do |g| %>
+			<option value= <%= g.id %>> <%= g.name %>  </option>
+			<% end %>
+		</select> 
+	</body>
+</html>

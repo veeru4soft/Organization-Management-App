@@ -1,0 +1,24 @@
+<h1>Listing Person Skill</h1>
+ 
+<table>
+  <tr>
+    <th>Person Id</th>
+    <th>Person Name</th>
+    <th>Skill Id</th>
+    <th>Skill1 Name</th>
+    <th>Person Phone Number</th>
+  </tr>
+ 
+<% @skill.each do |sk| %>
+	<% sk.each do |s| %>
+  <tr>
+    <td><%= s.person_id%></td>
+    <td> </td>
+    <td><%= s.id %></td>
+    <td><%= s.skill1 %></td>
+    <td> <%= s.skill2 %> </td>
+    <td> </td>
+  </tr>
+	<% end %>
+<% end %>
+</table>

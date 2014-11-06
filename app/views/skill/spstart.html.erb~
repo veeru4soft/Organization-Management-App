@@ -1,0 +1,11 @@
+<h1> Success </h1>
+<%= form_tag({:action => "spceate" }, :name => 'group')  do %>
+Group Id:
+	<select name ='grpsel'>
+	<%@grp.each do |g| %>
+		<option value=<%= g.id %>> <%= g.id %> </option>
+	<% end %>
+	</select>
+		
+	<%= submit_tag "Search", :id => "uploadid", :class => 'btn btn-primary'%>
+<% end %>

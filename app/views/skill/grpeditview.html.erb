@@ -1,0 +1,126 @@
+<html>
+	<head>
+		<style>
+			.control-label{
+				float:left !important;
+			}
+			.span3 {
+				position:absolute;
+				right:400px;
+			}
+		</style>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+
+		<script type="text/javascript">
+				$(document).ready(function(){
+
+							/* code for multiselect skills */
+						
+				var s = $('#skillvalue').val()
+				
+				var skills = s.split(',')	
+	
+				//alert(skills)
+				 var availableTags = skills
+					function split( val ) {
+					  return val.split( /,\s*/ );
+					}
+					function extractLast( term ) {
+					  return split( term ).pop();
+					}
+ 
+					$( "#skill" )
+					  // don't navigate away from the field on tab when selecting an item
+					  .bind( "keydown", function( event ) {
+						if ( event.keyCode === $.ui.keyCode.TAB &&
+							$( this ).data( "ui-autocomplete" ).menu.active ) {
+						  event.preventDefault();
+						}
+					  })
+					  .autocomplete({
+						minLength: 0,
+						source: function( request, response ) {
+						  // delegate back to autocomplete, but extract the last term
+						  response( $.ui.autocomplete.filter(
+							availableTags, extractLast( request.term ) ) );
+						},
+						focus: function() {
+						  // prevent value inserted on focus
+						  return false;
+						},
+						select: function( event, ui ) {
+						  var terms = split( this.value );
+						  // remove the current input
+						  terms.pop();
+						  // add the selected item
+						  terms.push( ui.item.value );
+						  // add placeholder to get the comma-and-space at the end
+						  terms.push( "" );
+						  this.value = terms.join( ", " );
+						  return false;
+						}
+					  });
+
+
+								
+				});
+
+				function validateMe() {
+					nameval = document.getElementById('sk1')
+					namevalue = nameval.value
+					if((namevalue == 'null') || (namevalue == ''))
+						{
+							document.getElementById('errormsg').innerHTML = 'Please Enter the Skill'
+							nameval.focus();
+								return false;
+						}
+						else {
+							document.getElementById('errormsg').innerHTML = ''
+							return true;
+						}
+					}		
+		</script>
+	</head>
+	<body>
+			<%= form_tag({:action => "grpskillupdate" }, :name => 'skills', :class => 'form-horizontal', :onsubmit => 'return validateMe()')  do %>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Group Name:</label>
+					<div class="controls">
+							<select name='grpsel' class='span2'>
+									
+								<option value=<%= @grp.id %>> <%= @grp.name %> </option>
+							</select>
+					  </div>
+			    </div>
+
+				<input type="hidden" value=<%= @skills1 %> id="skillvalue" />
+
+			<div class='control-group controls'>
+				<% @allskills. each do|p| %>
+					 <%= p.gsub(' ','').gsub("'",'').chomp() %>
+			  <% end %>
+
+			</div>
+				<div class="control-group">
+					<label class="control-label" for="inputsk1">Skill Name:</label>
+					<div class="controls">
+					  <input type="text" name ='skills[sk1]' id="skills" placeholder="SkillValue"> <span id='skillerrormsg'> </span>
+					</div>
+				</div>
+				
+			  
+				
+				<div class="pull-left span3">
+					
+					<%= submit_tag "Update", :id => "uploadid", :class => 'btn btn-primary'%>
+			    </div>
+	<% end %>
+
+	<br />
+<div class='btn'>		<%= link_to 'Back', sgshow_path %> </div>
+ 	</body>
+</html>

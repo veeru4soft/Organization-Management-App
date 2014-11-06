@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<script>
+			$(document).ready(function() {
+				$('#organizationselect').change(function() { 
+					var idval = $(this).val()
+					 $.ajax({
+				        url: "/groupsearch",
+						data: {id: idval},
+						dataType: 'html',
+						success: function(data) {
+							$(".groupsearch").html(data);							
+				        },
+						error: function(data) {
+							alert('error');
+						}
+				     });
+				});
+			});
+		</script>
+	</head>
+	<body>
+
+
+		<div class='btn'> <%= link_to 'Create Person Skills', sgshow_path %> </div> <br /> <br />
+		<%= form_tag({:action => "sgdisplay" }, :name => 'group', :class=>'form-horizontal')  do %>
+		<div class="control-group">
+					<label class="control-label" for="inputId">Organization :</label>
+					<div class="controls">
+							<select name='grpsel' class='span2' id='organizationselect'>
+								<option value=''> Select Organization </option>
+									<% @organization.each do |o| %>
+								<option value=<%= o.id %>> <%= o.name %> </option>
+									<% end %>
+							</select>
+					  </div>
+			    </div>
+			<div class="control-group">
+					<label class="control-label" for="inputId">Group :</label>
+					<div class="controls groupsearch">
+							<select name='grpsel' class='span2' disabled='disabled'>
+								<option value=''> </option>
+							</select>
+					  </div>
+			    </div>
+		
+			<%= submit_tag "Search", :id => "uploadid", :class => 'btn btn-primary'%>
+		<% end %>	
+	</body>
+</html>
+	

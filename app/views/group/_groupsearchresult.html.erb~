@@ -1,0 +1,34 @@
+<html>
+<head>
+	<script>
+		$(document).ready(function() { 
+			$('#groupfind').change(function() { 
+							var idval = $(this).val();
+							$.ajax({
+								url:'/peoplesearch',
+								data: {id:idval},
+								dataType:"html",
+								success: function(data) { 
+									$('.peoplesearch').html(data)
+								},
+								error: function(data) {
+									//alert('error Occurred')
+								}
+							});
+			});	
+		});
+	</script>
+</head>
+<body>
+<select name='grpsel' class='span2' id='groupfind'>
+	<option value=''> Select Group </option>
+	<%= @groups.each do |g| %>
+		<option value= <%= g.id %>> <%= g.name %>  </option>
+	<% end %>
+</select>
+</body>
+</html>
+
+
+
+	

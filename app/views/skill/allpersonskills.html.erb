@@ -1,0 +1,103 @@
+<html>
+	<head>
+			<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		  <script>
+				$('document').ready(function(){
+				
+				$('#opdelete').click(function(e){
+						
+					e.preventDefault();
+					var va = $(this).attr("class");
+					$( "#dialog-confirm" ).dialog({
+					  resizable: false,
+					  height:180,
+					  width:400,
+					  modal: true,
+					  buttons: {
+						"Delete": function() {
+						  $( this ).dialog( "close" );
+							
+							  $.ajax({
+				        		url: "/skilldestroy",
+								data: {id: va},
+				        		success: function (data) {
+									$("#myid").html("successfully deleted");
+									$("#myid1").html("");
+				        		}
+				    		   });
+
+						 },
+						"No": function() {
+						  $( this ).dialog( "close" );
+							return false;
+						  }
+						  }
+					  }); 
+				});				
+						
+
+});
+		  </script>
+	</head>
+	<body>
+<div id='myid1'>
+
+	<% if flash[:notice] %>
+		    <div class="alert alert-success">  
+  					<a class="close" data-dismiss="alert">&times;</a>  
+					  <strong>Success! </strong> <%= flash[:notice] %>
+			</div>  
+    <% end %>
+
+	<h1>Listing Person Skills</h1>
+
+	<div class='pull-right'>
+		<%= link_to 'Create Person Skills', spcreate_path, :class=>'btn' %>
+	</div>
+
+	<table class='table table-stiped table-hover'>
+	  <%= search_form_for @search1, :url=>'allPersonSkills' do |f| %>
+			<tr>
+				<td> <%= f.text_field :fname_cont, :placeholder => 'Filter', :class=>'filterbox'  %>  </td>
+				<td> <%= f.text_field :skill_cont, :placeholder => 'Filter', :class=>'filterbox'  %>  </td>
+				<td id='mptycolumn' colspan='2'> <%= f.submit 'Filter', :class=>'btn btn-primary' %> </td>
+			</tr>	
+		<% end %>	
+	  <tr>
+		<th> Person Name </th>
+		<th>Skills </th>
+		<th class='opth' colspan='2'> Action </th>
+		</tr>
+	<% begin %>
+	<% @people.each do |p| %>
+				<% @skill.each do |s| %>
+					<% if p.id == s.person_id %>
+						<% @sid = s.id %>
+					<% end %>
+			<% end %>
+	   <tr>
+		<td> <%= p.fname %>  </td> 
+		 <td>  <% p.skill.split('-').reject!{|element| element.empty?}. each do|p| %>
+		 <%= p.gsub(' ','').gsub("'",'').gsub("\|2",'').gsub('\r\n','').chomp() %>   
+			<% end %> </td>
+		
+		<td class='optd'> <a href='/usrskilledit/<%= @sid %>&<%= p.group_id %>&<%= p.id %>' title='Click to Edit the Skills' > <img src='assets/add.png'> </a> </td>
+					<td class='optd'> <%= link_to image_tag('/assets/delete.png'),skilldestroy_path(:id => p.id), :title=>'Click to Delete the Skills', :class=>p.id, :id=>'opdelete' %> </td>
+	   </tr>
+	<% end %>
+	<% rescue %>
+		<% end %>
+	</table>
+	</div>
+
+		<%= paginate @people %>
+	
+		<div id="dialog-confirm" title="Do you wanna Delete this?">
+  <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>This item will be permanently deleted and cannot be recovered. Are you sure?</p> </div>
+
+<br />
+	<div class='btn'> <%= link_to 'Back', sgshow_path %> </div>
+	</body>
+</html>

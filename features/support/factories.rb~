@@ -1,0 +1,8 @@
+require 'factory_girl'
+
+FactoryGirl.define do 
+	factory :org , class: Organization do
+	  name "Org"
+	end
+end
+

@@ -1,0 +1,117 @@
+<html>
+	<head>
+		<style>
+			.control-label{
+				float:left !important;
+			}
+			.span3 {
+				position:absolute;
+				right:400px;
+			}
+		</style>
+		<script type='text/javascript'>
+				function validateMe() {
+						if(validateFName()) {
+							if(validateLName()) {
+							 	return true; 	
+								}
+						}
+						return false;								
+					}
+
+					function validateFName() {
+						nameval = document.getElementById('pplfname')
+					namevalue = nameval.value
+					if((namevalue == 'null') || (namevalue == ''))
+						{
+							document.getElementById('errormsg1').innerHTML = 'Please Fill the Name'
+							nameval.focus();
+								return false;
+						}
+						else {
+							document.getElementById('errormsg1').innerHTML = ''
+							return true;
+						}
+					}
+					
+					function validateLName() {
+						nameval = document.getElementById('pplname')
+					namevalue = nameval.value
+					if((namevalue == 'null') || (namevalue == ''))
+						{
+							document.getElementById('errormsg2').innerHTML = 'Please Fill the Name'
+							nameval.focus()
+								return false;
+						}
+						else {
+							document.getElementById('errormsg1').innerHTML = ''
+							return true;
+						}
+					}						
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="span12">
+				<%= form_tag({:action => "pplupdate" }, :multipart=> true, :id => "form_id", :name => 'person', :class => 'form-horizontal', :onsubmit => 'return validateMe()')  do %>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Group Name:</label>
+					<div class="controls">
+							<select name='grpsel' class='span2'>
+									<% @grp.each do |g| %>
+								<option value=<%= g.id %>> org: <%= g.organization_id %> grp: <%= g.id %> <%= g.name %> </option>
+									<% end %>
+							</select>
+					  </div>
+			    </div>
+				<div class="control-group">
+					<label class="control-label" for="inputName">First Name:</label>
+					<div class="controls">
+					  <input type="text" name ='pplfname' id="pplfname" value=<%= @person.fname %> onblur='return validateFName()'> <span id='errormsg1'> </span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputLName">Last Name:</label>
+					<div class="controls">
+					  <input type="text" name ='pplname' id="pplname" value=<%= @person.name %> onblur='return validateLName()'> <span id='errormsg2'> </span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputProfilePicture">Profile Picture</label>
+					<div class="controls">
+					  <input type="file" name ='pplfile' id="pplfile" value=<%= @person.propic %>>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputcity">Place</label>
+					<div class="controls">
+					  <input type="text" name ='pplplace' id="pplplace" value=<%= @person.place %>>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputDob">Dob</label>
+					<div class="controls">
+					  <input type="text" name ='ppldob' id="ppldob" value=<%= @person.dob %>>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputphone">Phone Number</label>
+					<div class="controls">
+					  <input type="text" name ='pplph' id="pplph" value=<%= @person.phnum %>>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputEmail">Email</label>
+					<div class="controls">
+					  <input type="text" name ='pplemail' id="pplemail" value=<%= @person.email %>>
+					</div>
+				</div>
+				
+			<div class="pull-left span3">
+				<%= submit_tag "Update", :id => "uploadid", :class => 'btn btn-primary'%>
+			</div>
+	<% end %>
+	<br />
+		<%= link_to 'Back', pplshow_path %>
+ 	</body>
+</html>

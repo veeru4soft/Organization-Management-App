@@ -1,0 +1,30 @@
+<html>
+<head>
+	<script>
+			$(document).ready(function() { 
+				$('#personfind').change(function() { 
+								var idval = $(this).val();
+								$.ajax({
+									url:'/personskillsearch',
+									data: {id:idval},
+									dataType:"html",
+									success: function(data) { 
+										$('.skillsearch').html(data)
+									},
+									error: function(data) {
+										alert('error Occurred')
+									}
+								});
+				});	
+			});
+	</script>
+</head>
+<body>
+<select name ='prsnid' class='span2' id='personfind' %>
+<option value=''> Select Person </option>
+		<% @person.each do |p| %>
+		<option value =<%= p.id %>> <%= p.fname %> </option>
+		<% end %>
+</select>
+</body>
+</html>

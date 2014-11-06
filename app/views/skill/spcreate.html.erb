@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<style>
+			.control-label{
+				float:left !important;
+			}
+			.span3 {
+				position:absolute;
+				right:400px;
+			}
+		</style>
+		<script>
+				$(document).ready(function() { 
+
+						$('#organizationselect').change(function() { 
+							var idval = $(this).val();
+							$.ajax({
+								url:'/groupsearch',
+								data: {id:idval},
+								dataType:"html",
+								success: function(data) { 
+									$('.groupsearch').html(data)
+								},
+								error: function(data) {
+									alert('error Occurred')
+								}
+							});
+						});	
+				});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="span12">
+				<%= form_tag({:action => "spsave" }, :name => 'skills', :class => 'form-horizontal')  do %>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Organization :</label>
+					<div class="controls ">
+							<select name='orgsel' class='span2' id='organizationselect'>
+								<option value=''> Select Organization </option>
+									<% @organization.each do |o| %>
+								<option value=<%= o.id %>> <%= o.name %> </option>
+									<% end %>
+							</select>
+					  </div>
+			    </div>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Group :</label>
+					<div class="controls groupsearch">
+							<select name='grpsel' class='span2' disabled='disabled'>
+								<option value=''> </option>
+							</select>
+					  </div>
+			    </div>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Person :</label>
+					<div class="controls peoplesearch">
+							<select name='prsnid' class='span2' disabled='disabled'>
+								<option value=''> </option>
+							</select>
+					  </div>
+			    </div>
+				
+							
+			<div class="pull-left span3">
+				<%= submit_tag "Save", :id => "uploadid", :class => 'btn btn-primary'%>
+			</div>
+	<% end %>
+	<br />
+<div class='btn'>	<%= link_to 'View Person Skills', spshow_path %> </div>
+ 	</body>
+</html>

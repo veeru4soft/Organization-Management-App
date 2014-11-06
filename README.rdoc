@@ -1,0 +1,17 @@
+== README
+
+Rails application using Rails version 3.x, and Ruby version 1.9.x.
+
+The main purpose of this application is an user can create his/her organization and manage their organization with people having different groups
+
+* Bootstrap theme with Jquery
+
+* Erb's with ruby script
+
+* Ajax calling with auto complete effects
+
+* Ransack search and will_pagenation
+
+Etc are used
+
+Thanks,

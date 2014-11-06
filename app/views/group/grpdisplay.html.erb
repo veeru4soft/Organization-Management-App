@@ -1,0 +1,101 @@
+<html>
+	<head>
+
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		  <script>
+				$('document').ready(function(){
+					
+						
+				$('.optd1 img').click(function(e){
+					
+					$('#dialog-confirm').show();
+					e.preventDefault();
+					var va = $(this).attr("class");
+					$( "#dialog-confirm" ).dialog({
+					  resizable: false,
+					  height:180,
+					  width:400,
+					  modal: true,
+					  buttons: {
+						"Delete": function() {
+						  $( this ).dialog( "close" );
+							//return true;
+							  $.ajax({
+				        		url: "/ppldestroy",
+								data: {id: va},
+				        		success: function (data) {
+								$("#myid1").html(" ");
+								$("#myid").html(" successfully deleted");
+								
+							   
+				        		}
+				    		   });
+
+						 },
+						"No": function() {
+						  $( this ).dialog( "close" );
+							return false;
+						  }
+						  }
+					  }); 
+				});				
+						
+
+});
+		  </script>
+	</head>
+
+	<body>
+	<div id='myid1'>
+		<h1>Listing All Users under Group</h1>
+
+		<div class='pull-right'>
+			<%= link_to 'Add Person', pplcreate_path, :class=>'btn' %>
+		</div>
+
+ 		<%= search_form_for @search1, :url=>'groupshow'  do |f| %>
+				 <div class="field">
+					 <%= f.hidden_field :people_group_id_eq, :value => @grp.id , :name => 'grpsel' %>
+					 <%= f.text_field :group_name_or_name_cont, :placeholder => 'Total Filter', :class=>'filterbox'  %>
+	 			  	 <%= f.submit 'Filter', :class=>'btn btn-primary filterbutton' %>
+				  </div>
+		<% end %>
+		 
+		<table class='table table-stiped table-hover'>
+
+		<%= search_form_for @search1, :url=>'groupshow'  do |f| %>
+			<tr>
+				<%= f.hidden_field :people_group_id_eq, :value => @grp.id , :name => 'grpsel' %>
+				<td id='gname'> <%= f.text_field :group_name_cont, :placeholder => 'Filter', :class=>'filterbox' %> </td> 
+				<td id='pname'> <%= f.text_field :fname_cont, :placeholder => 'Filter', :class=>'filterbox' %> </td>
+				<td id='mptycolumn' colspan='2'> <%= f.submit 'Filter', :class=>'btn btn-primary' %> </td>
+			</tr>	
+		  <% end %>	
+
+		  <tr>
+			<th> <%= sort_link(@search, :group_name, "Group Name:", {action: 'groupshow', grpsel: @grp.id} ) %> </th>
+			<th> <%= sort_link(@search, :fname, "Person Name:", {action: 'groupshow', grpsel: @grp.id} ) %> </th>
+			<th class='opth' colspan='2'> Action </th>
+		  </tr>
+		 
+		<% @prsn.each do |p| %>
+		  <tr>
+			<td> <%= @grp.name %> </td>
+			<td><%= p.fname %></td>
+			<td class='optd'> <a href='/ppledit/<%= p.id %>' title='Click to Edit the User' > <img src='assets/tab_edit.png'> </a> </td>
+						<td class='optd1' id=<%= p.fname %>> <%= link_to image_tag('/assets/delete.png', :class=>p.id, :id=>'opdelte'+p.id.to_s),ppldestroy_path(:id => p.id), :title=>'Click to Delete the User', :class=>p.id, :id=>'opdelete' %> </td>
+		  </tr>
+		<% end %>
+
+
+		</table>
+	</div>
+	<%= paginate @prsn %>
+
+		<div id="dialog-confirm" title="Do you wanna Delete this?">
+  <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>This item will be permanently deleted and cannot be recovered. Are you sure?</p> </div>
+		<br/ >
+		<div class='btn'>	<%= link_to 'Back', search_path%> </div>
+	</body>

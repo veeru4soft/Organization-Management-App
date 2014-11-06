@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<script>
+				$(document).ready(function() { 
+					  $('#organizationselect').change(function() { 
+							var idval = $(this).val();
+							$.ajax({
+								url:'/groupSkillSearch',
+								data: {id:idval},
+								dataType:"html",
+								success: function(data) { 
+									$('.groupsearch').html(data)
+								},
+								error: function(data) {
+									alert('error Occurred')
+								}
+							});
+						});			
+				});
+
+				function validateMe() {
+					return skillSelectionValidation();
+				}
+
+				function skillSelectionValidation() {
+					nameval = document.getElementById('personfind')
+					namevalue = nameval.value
+					if((namevalue == 's') || (namevalue == '')) 
+						{
+							document.getElementById('personerrormsg').innerHTML = 'Please Choose the Person'
+							//alert('eee')
+								return false;
+						}
+						else {
+							document.getElementById('personerrormsg').innerHTML = ''
+							return true;
+						}
+					 
+					}	
+
+					function groupSelectionValidation() {
+							groupva = document.getElementById('grpfind')
+							groupvalue = groupva.value
+							alert(groupvalue)
+							if((groupvalue == 's')||(groupvalue == '')) 
+							{
+								
+								document.getElementById('grouperrormsg').innerHTML = 'Please Select the Group';
+								return false;
+							}
+							else {
+								document.getElementById('grouperrormsg').innerHTML = ''
+								return true;
+							}
+					}	
+		</script>	
+	</head>
+	<body>
+	<div class='btn'> <%= link_to 'Create Group Skills', sgcreate_path %> </div> <br /> <br />
+		<%= form_tag({:action => "spdisplay" }, :name => 'group', :class=>'form-horizontal', :onsubmit => 'return validateMe()')  do %>
+			<div class="control-group">
+					<label class="control-label" for="inputId">Organization :</label>
+					<div class="controls ">
+							<select name='orgsel' class='span2' id='organizationselect'>
+								<option value=''> Select Organization </option>
+									<% @organization.each do |o| %>
+								<option value=<%= o.id %>> <%= o.name %> </option>
+									<% end %>
+							</select>
+					  </div>
+			    </div>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Group :</label>
+					<div class="controls groupsearch">
+							<select name='grpsel' class='span2' disabled='disabled' id='grpfind'>
+								<option value='s'> </option>
+							</select> <span id='grouperrormsg'> </span>
+					  </div>
+			    </div>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Person :</label>
+					<div class="controls peoplesearch">
+							<select name='grpsel' class='span2' disabled='disabled' id='personfind'>
+								<option value='s'> </option>
+							</select> <span id='personerrormsg'> </span>
+					  </div> 
+			    </div>
+
+		
+			<%= submit_tag "Search", :id => "uploadid", :class => 'btn btn-primary'%>
+		<% end %>	
+	</body>
+</html>
+

@@ -1,0 +1,24 @@
+<table class='table table-striped table-hover' >
+			<tr>
+				<th> Group Id: </th>
+				<th> Person Id </th>
+				<th> Name:</th>
+				<th> DOB</th>
+				<th> Communication Details</th>	
+				<th> Picture </th>
+				<th colspan='2' class='opth'>Action</th>
+			</tr>
+
+		<% @prsn.each do |s| %>
+			<tr>
+				<td> <%= s.group_id %>
+				<td> <%= s.id %> </td>
+				<td> <%= s.fname %> <%= s.name %> </td>
+				<td> <%= s.dob %> </td>
+				<td> <%= s.email %> <br /> <%= s.phnum %> </td>
+				<td class='imgstyle'> <% @cont = Base64.encode64(s.propic) %> <img src="data:image/jpeg;base64,<%= @cont %>" class="img-polaroid" />
+				<td class='optd' id = 'optd1'> <a href='/ppledit/<%= s.id %>' title='Click to Edit the Organization' name='edit' > <img src='assets/tab_edit.png'> </a> </td>
+				<td class='optd1' id=<%= s.name %>> <%= link_to image_tag('/assets/delete.png', :class=>s.id, :id=>'opdelete'), grpdestroy_path(), :title => 'Click to Delete the Organization', :class=> s.id, :id=> 'opdelete' %> </td>
+			</tr>
+			<% end %>
+		</table>

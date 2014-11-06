@@ -1,0 +1,87 @@
+<html>
+	<title> Skill Management System </title>
+	<head>
+		<style>
+			
+			.header {
+				background:black;
+				color:white;
+				height:120px;			
+			}
+			.header1 {
+				height:20px;
+			}
+			.myheader {
+				font-family: myOwnFonts !important;
+				letter-spacing:5px;
+				color:gray;
+				font-size:3.2em !important;
+			}	
+			.span9 {
+					margin-left:-80px;
+			}
+			@font-face {
+				font-family:myOwnFonts;
+				src: url('/assets/AlexBrush-Regular-OTF.otf');
+			}
+
+		</style>
+		
+	</head>
+	<body>
+		<div class="container-fluid header">
+			
+			<div class='span12'>
+				<div class='span12'>	<h1 class='myheader'> Skill Management System </h1> </div>
+			</div>
+		   		
+		<div class='row'>
+		<div id='myid' class='span12 pull-left'>.
+		</div> 
+		</div>
+		<div class='span10'>
+		<ul class="nav-tabs nav">
+			 <li class="active"> <a href="/"> <i class="icon-home icon-white"> </i> Home</a></li>  
+
+
+			  <li class='dropdown' id="org"> <a href="#" class='dropdown-toggle' data-toggle="dropdown" id='orga'> <i class="icon-hospital icon-white"> </i> Organization <b class="caret"></b></a>
+					<ul class="nav nav-tabs dropdown-menu orga1">
+					  <li id="neworg" ><a href="/ocreate" id="orgnew">Create New Organization</a> </li> 
+					  <li id='vieworg'><a href="/allorgshow" id ="orgview">View All Organizations</a> </li>
+					  <li id='viewgrp'><a href="/oviewgrp" id ="grpview">View Groups Under Organization</a> </li>
+  					  <li id='viewuser'><a href="/oview" id ="userview">View Users Under Organization</a> </li>
+					</ul>
+
+			  </li>
+			  <li class='dropdown' id='group'> <a href="#" class='dropdown-toggle' data-toggle="dropdown" id="grp"> <i class="icon-group icon-white"> </i> Group <b class="caret"> </b> </a>
+					<ul class="nav nav-tabs dropdown-menu grp1">
+					  <li id='newgrp'><a href="/gcreate" id="grpnew">Create New Group</a> </li> 
+					  <li id='grpallshow'><a href="/grpallshow" id="grpnew">View All Groups</a> </li> 			
+					  <li id='grpusers'><a href="/search" id='usersgrp'>View Users under Group </a> </li>
+					</ul>
+			  </li>
+			  <li class='dropdown' id='user'><a href="#" class='dropdown-toggle' data-toggle="dropdown" id="usercreate"> <i class="icon-user icon-white"> </i> User <b class="caret"> </b> </a>
+					<ul class="nav nav-tabs dropdown-menu usr1">
+					  <li id='newuser'><a href="/pplcreate" id='usernew'>Create New User</a> </li>
+					  <li id='viewallusers'><a href="/pplallshow" id='alluserprofile'>View All Users </a> </li>
+					  <li id='viewprofile'><a href="/pplshow" id='userprofile'>View Users Profile by Id</a> </li>
+					</ul>
+			  </li>
+			  <li class='dropdown' id='skillcreate'><a href="#" class='dropdown-toggle' data-toggle="dropdown" id="createskill"> <i class="icon-book icon-white"> </i> Skill <b class="caret"> </b> </a>
+					<ul class="nav nav-tabs dropdown-menu skill1">
+					  <li id='newgrpskill'><a href="/sgcreate" id='skillgrpnew'> Create Skills For Group </a> </li>
+					  <li id='newprsnskill'><a href="/spcreate" id='newskillprsn'> Create Skills For Person </a>  </li>
+					  <li id='personskillsview' ><a href="/spshow" id='personskillsdisplay'>View Person Skill </a> </li>
+					  <li id='groupskillsview'><a href="/sgshow" id='groupskillsdisplay'>View Group Skill </a> </li>
+
+					  <li id='' ><a href="/allGroupSkills" id=''>View All Group Skills </a> </li>
+					  <li id=''><a href="/allPersonSkills" id=''>View All Person Skills </a> </li>
+					</ul>
+			  </li>
+			</ul>
+			</div>
+		</div>
+		<div class="header1">
+		</div>
+		</body>
+</html>

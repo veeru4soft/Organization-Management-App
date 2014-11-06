@@ -1,0 +1,8 @@
+<%= form_tag({:action => 'show'}, :class=>'form-horizontal') do %>
+Enter Organization Id: <select name='orgsel'>
+			<% @org.each do |o| %>
+			<option value=<%= o.id %>> <%= o.id %> </option>
+			<% end %>
+		</select>
+<%= submit_tag "Show", :id => "uploadid", :class => 'btn btn-primary'%>
+<% end %>

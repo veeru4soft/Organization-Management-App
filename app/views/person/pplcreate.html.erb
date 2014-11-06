@@ -1,0 +1,145 @@
+<html>
+	<head>
+		<style>
+			.control-label{
+				float:left !important;
+			}
+			.span3 {
+				position:absolute;
+				right:400px;
+			}
+		</style>
+		<script type='text/javascript'>
+				function validateMe() {
+						if(validateFName()) {
+							if(validateLName()) {
+							 	return true; 	
+								}
+						}
+						return false;								
+					}
+
+					function validateFName() {
+						nameval = document.getElementById('pplfname')
+					namevalue = nameval.value
+					if((namevalue == 'null') || (namevalue == ''))
+						{
+							document.getElementById('errormsg1').innerHTML = 'Please Fill the Name'
+							nameval.focus();
+								return false;
+						}
+						else {
+							document.getElementById('errormsg1').innerHTML = ''
+							return true;
+						}
+					}
+					
+					function validateLName() {
+						nameval = document.getElementById('pplname')
+					namevalue = nameval.value
+					if((namevalue == 'null') || (namevalue == ''))
+						{
+							document.getElementById('errormsg2').innerHTML = 'Please Fill the Name'
+							nameval.focus()
+								return false;
+						}
+						else {
+							document.getElementById('errormsg1').innerHTML = ''
+							return true;
+						}
+					}						
+		</script>
+		<script>
+				$(document).ready(function() { 
+
+						$('#organizationselect').change(function() { 
+							var idval = $(this).val();
+							$.ajax({
+								url:'/groupsearch',
+								data: {id:idval},
+								dataType:"html",
+								success: function(data) { 
+									$('.groupsearch').html(data)
+								},
+								error: function(data) {
+									alert('error Occurred')
+								}
+							});
+						});	
+				});
+		</script>
+	</head>
+	<body>
+		<div class="container"> <div class='btn'>	<%= link_to 'View Person', pplshow_path %> </div> <br /> <br />
+			<div class="span12">
+				<%= form_tag({:action => "pplsave" }, :multipart=> true, :id => "form_id", :name => 'person', :class => 'form-horizontal', :onsubmit => 'return validateMe()')  do %>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Organization :</label>
+					<div class="controls ">
+							<select name='orgsel' class='span2' id='organizationselect'>
+								<option value=''> Select Organization </option>
+									<% @organization.each do |o| %>
+								<option value=<%= o.id %>> <%= o.name %> </option>
+									<% end %>
+							</select>
+					  </div>
+			    </div>
+				<div class="control-group">
+					<label class="control-label" for="inputId">Group :</label>
+					<div class="controls groupsearch">
+							<select name='grpsel' class='span2' disabled='disabled'>
+								<option value=''> </option>
+							</select>
+					  </div>
+			    </div>
+				<div class="control-group">
+					<label class="control-label" for="inputName">First Name:</label>
+					<div class="controls">
+					  <input type="text" name ='pplfname' id="pplfname" placeholder="First Name" onblur='return validateFName()'> <span id='errormsg1'> </span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputLName">Last Name:</label>
+					<div class="controls">
+					  <input type="text" name ='pplname' id="pplname" placeholder="Last Name" onblur='return validateLName()'> <span id='errormsg2'> </span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputProfilePicture">Profile Picture</label>
+					<div class="controls">
+					  <input type="file" name ='pplfile' id="pplfile" placeholder="Place">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputcity">Place</label>
+					<div class="controls">
+					  <input type="text" name ='pplplace' id="pplplace" placeholder="Place">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputDob">Dob</label>
+					<div class="controls">
+					  <input type="text" name ='ppldob' id="ppldob" placeholder="DD-MM-YYYY">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputphone">Phone Number</label>
+					<div class="controls">
+					  <input type="text" name ='pplph' id="pplph" placeholder="Phone Number">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputEmail">Email</label>
+					<div class="controls">
+					  <input type="text" name ='pplemail' id="pplemail" placeholder="Email">
+					</div>
+				</div>
+				
+			<div class="pull-left span3">
+				<%= submit_tag "Save", :id => "uploadid", :class => 'btn btn-primary'%>
+			</div>
+	<% end %>
+	<br />
+
+ 	</body>
+</html>

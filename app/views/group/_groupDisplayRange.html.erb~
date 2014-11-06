@@ -1,0 +1,18 @@
+<table class='table table-striped table-hover' >
+			<tr>
+				<th> Organization Id: </th>
+				<th> Group Id </th>
+				<th> Name:</th>
+				<th colspan='2' class='opth'>Action</th>
+			</tr>
+
+		<% @grp.each do |s| %>
+			<tr>
+				<td> <%= s.organization_id %>
+				<td> <%= s.id %> </td>
+				<td> <%= s.name %> </td>
+				<td class='optd' id = 'optd1'> <a href='/grpedit/<%= s.id %>' title='Click to Edit the Organization' name='edit' > <img src='assets/tab_edit.png'> </a> </td>
+				<td class='optd1' id=<%= s.name %>> <%= link_to image_tag('/assets/delete.png', :class=>s.id, :id=>'opdelete'), grpdestroy_path(), :title => 'Click to Delete the Organization', :class=> s.id, :id=> 'opdelete' %> </td>
+			</tr>
+			<% end %>
+		</table>

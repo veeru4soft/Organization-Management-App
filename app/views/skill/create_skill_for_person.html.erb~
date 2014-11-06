@@ -1,0 +1,15 @@
+<div class= 'btn'> <%= link_to 'View Person Skills', spshow_path %> </div> <br /> <br />
+
+<%= form_tag({:action => "spcreate" }, :name => 'group')  do %>
+Person Belongs :
+	<select name ='grpsel' class='span3'>
+	<% @grp.each do |g| %>
+  	     <option value=<%= g.id %>> org: <%= g.organization_id %> grp: <%= g.id %> <%= g.name %> </option>
+	<% end %>
+	</select>
+		
+	<%= submit_tag "Search", :id => "uploadid", :class => 'btn btn-primary'%>
+<% end %>
+
+<br />
+
